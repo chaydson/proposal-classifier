@@ -8,8 +8,8 @@ require_relative "classifier/version"
 
 module Proposal
   module Classifier
-    class Error < StandardError; end
-      def predict_onx(input_text)
+    class Model
+      def self.predict_onx(input_text)
         nlp = Spacy::Language.new("pt_core_news_lg")
         doc = nlp.read(input_text)
         vector = doc.vector
@@ -20,5 +20,6 @@ module Proposal
         pred_onx = model.run([label_name], {X: vector_fim_reshaped})[0]
         return pred_onx
       end
+    end
   end
 end
