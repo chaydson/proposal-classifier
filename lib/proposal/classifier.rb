@@ -14,7 +14,7 @@ module Proposal
         doc = nlp.read(input_text)
         vector = doc.vector
         scaled_array = (vector - vector.min) / (vector.max - vector.min) * (1 - 0) + 0
-        model = OnnxRuntime::InferenceSession.new("lib/proposal/exported_model.onnx")
+        model = OnnxRuntime::InferenceSession.new("./exported_model.onnx")
         label_name = model.outputs()[0][:name]
         vector_fim_reshaped = scaled_array.reshape(1, -1)
         pred_onx = model.run([label_name], {X: vector_fim_reshaped})[0]
