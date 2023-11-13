@@ -21,6 +21,7 @@ module Proposal
       def self.predict(input_text)
         response_post = HTTP.post("#{@@base_url}/predict", :json => { :text => input_text })
         return response_post
+      end
     end
   end
 end
