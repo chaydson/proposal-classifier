@@ -16,12 +16,12 @@ module Proposal
       end
 
       def self.init()
-        response_get = HTTP.get(@base_url).body.to_s.dub
+        response_get = HTTP.get(@base_url).body.to_s
         return response_get
       end
 
       def self.predict(input_text)
-        response_post = HTTP.post("#{@base_url}/predict", :json => { :text => input_text }).body.to_s.dub
+        response_post = HTTP.post("#{@base_url}/predict", :json => { :text => input_text }).body.to_s
         return response_post
       end
     end
