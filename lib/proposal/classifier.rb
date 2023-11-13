@@ -1,25 +1,26 @@
-# frozen_string_literal: true
-require 'onnxruntime'
-require 'ruby-spacy'
-require 'pycall/import'
-include PyCall::Import
-
-require_relative "classifier/version"
+require "http"
 
 module Proposal
   module Classifier
     class Model
-      def self.predict_onx(input_text, onnx_model_path)
-        nlp = Spacy::Language.new("pt_core_news_lg")
-        doc = nlp.read(input_text)
-        vector = doc.vector
-        scaled_array = (vector - vector.min) / (vector.max - vector.min) * (1 - 0) + 0
-        model = OnnxRuntime::InferenceSession.new(onnx_model_path)
-        label_name = model.outputs()[0][:name]
-        vector_fim_reshaped = scaled_array.reshape(1, -1)
-        pred_onx = model.run([label_name], {X: vector_fim_reshaped})[0]
-        return pred_onx
+      @@base_url = "http://0.0.0.0/"  # Default base URL
+
+      def self.base_url
+        @@base_url
       end
+
+      def self.base_url=(new_url)
+        @@base_url = new_url
+      end
+
+      def self.init()
+        response_get = HTTP.get("#{@@base_url}")
+        return response_get
+      end
+
+      def self.predict(input_text)
+        response_post = HTTP.post("#{@@base_url}/predict", :json => { :text => input_text })
+        return response_post
     end
   end
 end

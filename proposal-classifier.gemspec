@@ -31,9 +31,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "onnxruntime", "~> 0.7.6"
-  spec.add_dependency "ruby-spacy", "~> 0.1.5.4"
-  spec.add_dependency "pycall", "~> 1.4.2"
+  spec.add_dependency "http", "~> 3.0"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html
