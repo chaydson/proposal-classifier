@@ -15,12 +15,14 @@ module Proposal
 
       def self.init()
         response_get = HTTP.get("#{@@base_url}")
-        return response_get.parse
+        formatted_get_response = response_get.parse
+        return formatted_get_response
       end
 
       def self.predict(input_text)
         response_post = HTTP.post("#{@@base_url}/predict", :json => { :text => input_text })
-        return response_post.parse
+        formatted_post_response = response_post.parse
+        return formatted_post_response
       end
     end
   end
