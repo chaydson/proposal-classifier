@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 RSpec.describe Proposal::Classifier do
   it "has a version number" do
