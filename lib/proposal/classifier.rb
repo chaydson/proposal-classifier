@@ -8,21 +8,21 @@ module Proposal
       @base_url = "http://0.0.0.0"  # Default base URL
 
       def self.base_url
-        @base_url.clone
+        @base_url.dup
       end
 
       def self.base_url=(new_url)
-        @base_url = new_url.clone
+        @base_url = new_url.dup
       end
 
       def self.init()
-        response_get = HTTP.get(@base_url.clone).body.to_s.clone
-        return response_get.clone
+        response_get = HTTP.get(@base_url.dup).body.to_s.dup
+        return response_get.dup
       end
 
       def self.predict(input_text)
-        response_post = HTTP.post("#{@base_url.clone}/predict", :json => { :text => input_text }).body.to_s.clone
-        return response_post.clone
+        response_post = HTTP.post(@base_url.dup + "/predict", :json => { :text => input_text }).body.to_s.dup
+        return response_post.dup
       end
     end
   end
